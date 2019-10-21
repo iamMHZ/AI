@@ -9,23 +9,23 @@ class Search:
         pass
 
     def bfs(self, puzzle: Puzzle8):
-        queueBfs = Queue()
+        queue_bfs = Queue()
         # get current
         start = self.puzzle
         # add initial state to queue:
-        queueBfs.put(start)
+        queue_bfs.put(start)
 
-        while not queueBfs.empty():
-            puzzleHelp = queueBfs.get()
+        while not queue_bfs.empty():
+            puzzle_help = queue_bfs.get()
 
-            if self.is_goal(puzzleHelp):
+            if self.is_goal(puzzle_help):
                 print("GOAL Found ")
                 return
 
-            possible_states = puzzleHelp.expand()
+            possible_states = puzzle_help.expand()
 
             for state in possible_states:
-                queueBfs.put(state)
+                queue_bfs.put(state)
 
     def dfs(self, puzzle: Puzzle8):
         stack = LifoQueue()
@@ -35,13 +35,13 @@ class Search:
         stack.put(start)
 
         while not stack.empty():
-            puzzleHelp = stack.get()
+            puzzle_help = stack.get()
 
-            if self.is_goal(puzzleHelp):
+            if self.is_goal(puzzle_help):
                 print("GOAL Found ")
                 return
 
-            possible_states = puzzleHelp.expand()
+            possible_states = puzzle_help.expand()
 
             for state in possible_states:
                 stack.put(state)
