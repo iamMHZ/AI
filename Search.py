@@ -1,4 +1,5 @@
-import queue
+from queue import Queue
+from queue import LifoQueue
 from Puzzle8 import Puzzle8
 
 
@@ -8,14 +9,14 @@ class Search:
         pass
 
     def bfs(self, puzzle: Puzzle8):
-        q = queue.Queue()
+        queueBfs = Queue()
         # get current
         start = self.puzzle.data
         # add initial state to queue:
-        queue.put(start)
+        queueBfs.put(start)
 
-        while not queue.empty():
-            current = q.get()
+        while not queueBfs.empty():
+            current = queueBfs.get()
 
             if self.is_goal(current):
                 print("GOAL Found ")
@@ -24,7 +25,7 @@ class Search:
             possible_states = puzzle.expand(current)
 
             for state in possible_states:
-                q.put(state)
+                queueBfs.put(state)
 
     def dfs(self):
         pass

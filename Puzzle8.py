@@ -5,3 +5,6 @@ class Puzzle8:
 
     def is_goal(self):
         pass
+
+    def expand(self):
+        pass
