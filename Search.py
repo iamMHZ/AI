@@ -1,5 +1,5 @@
 import queue
-from puzzle8 import Puzzle8
+from Puzzle8 import Puzzle8
 
 
 class Search:
