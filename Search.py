@@ -1,18 +1,30 @@
-from queue import PriorityQueue
+import queue
 from puzzle8 import Puzzle8
 
 
 class Search:
 
-    def __init__(self, puzzle: Puzzle8):
-        self.puzzle = puzzle
+    def __init__(self):
+        pass
 
-    def bfs(self):
-        queue = PriorityQueue()
+    def bfs(self, puzzle: Puzzle8):
+        q = queue.Queue()
         # get current
         start = self.puzzle.data
+        # add initial state to queue:
+        queue.put(start)
 
+        while not queue.empty():
+            current = q.get()
 
+            if self.is_goal(current):
+                print("GOAL Found ")
+                return
+
+            possible_states = puzzle.expand(current)
+
+            for state in possible_states:
+                q.put(state)
 
     def dfs(self):
         pass
@@ -27,7 +39,4 @@ class Search:
         pass
 
     def ids(self):
-        pass
-
-    def expand(self):
         pass
