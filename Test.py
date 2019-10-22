@@ -1,6 +1,10 @@
 from Puzzle8 import Puzzle8
+from Search import Search
 
-test = [0, 2, 3, 4, 1, 5, 6, 7, 8]
+test = [1, 2, 3, 4, 5, 6, 0, 7, 8]
+
 p = Puzzle8(test)
 
-p.expand(test)
+search = Search()
+
+search.dfs(p)
