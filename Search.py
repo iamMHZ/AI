@@ -21,7 +21,7 @@ class Search:
     def ucs(self):
         pass
 
-    def astar(self):
+    def a_star(self):
         pass
 
     def dls(self):
