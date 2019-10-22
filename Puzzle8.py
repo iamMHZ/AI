@@ -1,5 +1,7 @@
 import numpy as np
 import queue
+from Movement import Movement
+from copy import copy
 
 
 # it is class puzzle8
@@ -7,9 +9,9 @@ import queue
 
 class Puzzle8:
 
-    def __init__(self, data):
+    def __init__(self, data, state_stack=queue.LifoQueue()):
         self.data = data
-        self.state_stack = queue.LifoQueue()
+        self.state_stack = state_stack
 
     def __str__(self):
         return str(self.data) + "\n\n"
@@ -29,88 +31,149 @@ class Puzzle8:
         if space_index == 0:
 
             new_state = self.swap(self.data.copy(), 0, 1)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.RIGHT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 0, 3)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.DOWN)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 1:
             new_state = self.swap(self.data.copy(), 1, 0)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.LEFT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 1, 4)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.DOWN)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
         elif space_index == 2:
             new_state = self.swap(self.data.copy(), 2, 1)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.LEFT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 2, 5)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.DOWN)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 3:
             new_state = self.swap(self.data.copy(), 3, 0)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.UP)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 3, 4)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.RIGHT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 3, 6)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.DOWN)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 4:
             new_state = self.swap(self.data.copy(), 4, 1)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.UP)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 4, 5)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.RIGHT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 4, 3)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.LEFT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 4, 7)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.DOWN)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 5:
             new_state = self.swap(self.data.copy(), 5, 2)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.UP)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 5, 4)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.LEFT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 5, 8)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.DOWN)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 6:
             new_state = self.swap(self.data.copy(), 6, 3)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.UP)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 6, 7)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.RIGHT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 7:
             new_state = self.swap(self.data.copy(), 7, 4)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.UP)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 7, 6)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.LEFT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 7, 8)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.RIGHT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         elif space_index == 8:
             new_state = self.swap(self.data.copy(), 8, 5)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.UP)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
+
             new_state = self.swap(self.data.copy(), 8, 7)
-            puzzle = Puzzle8(new_state)
+            stack = copy(self.state_stack)
+            stack.put(Movement.LEFT)
+            puzzle = Puzzle8(new_state, stack)
             possible_states.append(puzzle)
 
         return possible_states
