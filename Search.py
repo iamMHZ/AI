@@ -34,11 +34,44 @@ class Search:
 
             possible_states = puzzle_help.expand()
 
-            for state in possible_states:
-                queue_pro.put((puzzle.get_priority(), puzzle))
+            for p in possible_states:
+                queue_pro.put((puzzle.get_priority(), p))
 
-    def a_star(self):
-        pass
+    def a_star(self, puzzle: Puzzle8):
+        queue_pro = PriorityQueue()
+
+        queue_pro.put((puzzle.get_priority() + Utility.get_hurestic1(puzzle), puzzle))
+
+        while not queue_pro.empty():
+            puzzle_help = queue_pro.get()
+            print(puzzle_help)
+
+            if Utility.is_goal(puzzle_help):
+                print("GOAL Found ")
+                return
+
+            possible_states = puzzle_help.expand()
+
+            for p in possible_states:
+                queue_pro.put((p.get_priority() + Utility.get_hurestic1(p), p))
+
+    def a_star_heuristic_2(self, puzzle: Puzzle8):
+        queue_pro = PriorityQueue()
+
+        queue_pro.put((puzzle.get_priority() + Utility.get_hurestic2(puzzle), puzzle))
+
+        while not queue_pro.empty():
+            puzzle_help = queue_pro.get()
+            print(puzzle_help)
+
+            if Utility.is_goal(puzzle_help):
+                print("GOAL Found ")
+                return
+
+            possible_states = puzzle_help.expand()
+
+            for p in possible_states:
+                queue_pro.put((p.get_priority() + Utility.get_hurestic2(p), p))
 
     def ids(self):
         pass
