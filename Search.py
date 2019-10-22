@@ -1,7 +1,7 @@
 from queue import Queue
 from queue import LifoQueue
 
-from Utility import Utility
+import Utility
 from Puzzle8 import Puzzle8
 
 
@@ -36,6 +36,7 @@ class Search:
 
         while not collect.empty():
             puzzle_help = collect.get()
+            print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
                 print("GOAL Found ")
