@@ -21,7 +21,21 @@ class Search:
 
     def ucs(self, puzzle: Puzzle8):
         queue_pro = PriorityQueue()
-        self.help_search(queue_pro, puzzle)
+
+        queue_pro.put((puzzle.get_priority(), puzzle))
+
+        while not queue_pro.empty():
+            puzzle_help = queue_pro.get()
+            print(puzzle_help)
+
+            if Utility.is_goal(puzzle_help):
+                print("GOAL Found ")
+                return
+
+            possible_states = puzzle_help.expand()
+
+            for state in possible_states:
+                queue_pro.put((puzzle.get_priority(), puzzle))
 
     def a_star(self):
         pass

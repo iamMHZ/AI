@@ -20,6 +20,9 @@ class Puzzle8:
         _list[to], _list[_from] = _list[_from], _list[to]
         return _list
 
+    def get_priority(self):
+        return self.state_stack.qsize()
+
     def expand(self):
         # taking a copy of current state of this 8-puzzle
 
