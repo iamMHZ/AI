@@ -11,13 +11,6 @@ class Puzzle8:
         self.data = data
         self.state_stack = queue.LifoQueue()
 
-    # def getData(self):
-    #     return self.data
-    @staticmethod
-    def is_goal(puzzle):
-        goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
-        return puzzle.data == goal
-
     def swap(self, _list, to, _from):
         _list[to], _list[_from] = _list[_from], _list[to]
 
