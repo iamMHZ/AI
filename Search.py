@@ -11,7 +11,7 @@ class Search:
     def bfs(self, puzzle: Puzzle8):
         queue_bfs = Queue()
         # get current
-        start = puzzle.date
+        start = puzzle
         # add initial state to queue:
         queue_bfs.put(start)
 
@@ -30,7 +30,7 @@ class Search:
     def dfs(self, puzzle: Puzzle8):
         stack = LifoQueue()
         # get current
-        start = puzzle.data
+        start = puzzle
         # add initial state to queue:
         stack.put(start)
 

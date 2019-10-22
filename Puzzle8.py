@@ -13,7 +13,6 @@ class Puzzle8:
 
     def swap(self, _list, to, _from):
         _list[to], _list[_from] = _list[_from], _list[to]
-
         return _list
 
     def expand(self):
