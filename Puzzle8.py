@@ -11,6 +11,9 @@ class Puzzle8:
         self.data = data
         self.state_stack = queue.LifoQueue()
 
+    def __str__(self):
+        return str(self.data) + "\n\n"
+
     def swap(self, _list, to, _from):
         _list[to], _list[_from] = _list[_from], _list[to]
         return _list

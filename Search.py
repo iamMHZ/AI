@@ -1,7 +1,7 @@
 from queue import Queue
 from queue import LifoQueue
 from Puzzle8 import Puzzle8
-
+import Utility
 
 class Search:
 
@@ -9,6 +9,7 @@ class Search:
         pass
 
     def bfs(self, puzzle: Puzzle8):
+
         queue_bfs = Queue()
         # get current
         start = puzzle
@@ -17,8 +18,9 @@ class Search:
 
         while not queue_bfs.empty():
             puzzle_help = queue_bfs.get()
+            print(puzzle_help)
 
-            if Puzzle8.is_goal(puzzle_help):
+            if Utility.is_goal(puzzle_help):
                 print("GOAL Found ")
                 return
 
@@ -37,7 +39,7 @@ class Search:
         while not stack.empty():
             puzzle_help = stack.get()
 
-            if Puzzle8.is_goal(puzzle_help):
+            if Utility.is_goal(puzzle_help):
                 print("GOAL Found ")
                 return
 
