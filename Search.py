@@ -37,7 +37,7 @@ class Search:
         while not collect.empty():
             puzzle_help = collect.get()
 
-            if Puzzle8.is_goal(puzzle_help):
+            if Utility.is_goal(puzzle_help):
                 print("GOAL Found ")
                 return
 
