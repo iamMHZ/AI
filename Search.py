@@ -1,5 +1,6 @@
 from queue import Queue
 from queue import LifoQueue
+from queue import PriorityQueue
 
 import Utility
 from Puzzle8 import Puzzle8
@@ -18,13 +19,11 @@ class Search:
         stack = LifoQueue()
         self.help_search(stack, puzzle)
 
-    def ucs(self):
-        pass
+    def ucs(self, puzzle: Puzzle8):
+        queue_pro = PriorityQueue()
+        self.help_search(queue_pro, puzzle)
 
     def a_star(self):
-        pass
-
-    def dls(self):
         pass
 
     def ids(self):
