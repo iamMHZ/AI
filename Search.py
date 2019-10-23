@@ -73,8 +73,29 @@ class Search:
             for p in possible_states:
                 queue_pro.put((p.get_priority() + Utility.get_hurestic2(p), p))
 
-    def ids(self):
-        pass
+    def ids(self, puzzle: Puzzle8):
+        stack = LifoQueue()
+        conter = 1
+
+        while True:
+
+            # add initial state to queue:
+            stack = LifoQueue()
+            stack.put(puzzle)
+            while not stack.empty():
+                puzzle_help = stack.get()
+                print(puzzle_help)
+
+                if Utility.is_goal(puzzle_help):
+                    print("GOAL Found ")
+                    return
+
+                possible_states = puzzle_help.expand()
+
+                for state in possible_states:
+                    if (state.get_priority() < conter):
+                        stack.put(state)
+            conter += 1
 
     def help_search(self, collect, puzzle):
         # add initial state to queue:
