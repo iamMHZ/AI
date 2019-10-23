@@ -97,6 +97,32 @@ class Search:
                         stack.put(state)
             conter += 1
 
+    def ida_star(self, puzzle: Puzzle8):
+        cutoff = Utility.get_hurestic1(puzzle)
+
+        while True:
+            stack = LifoQueue()
+            stack.put(puzzle)
+
+            while not stack.empty():
+                puzzle_help = stack.get()
+                print(puzzle_help)
+
+                if Utility.is_goal(puzzle_help):
+                    print("GOAL Found ")
+                    return
+
+                possible_states = puzzle_help.expand()
+
+                for state in possible_states:
+                    pri = state.get_priority() + Utility.get_hurestic1(state)
+                    if pri < cutoff:
+                        stack.put(state)
+            cutoff += 1
+
+        pass
+
+
     def help_search(self, collect, puzzle):
         # add initial state to queue:
         collect.put(puzzle)

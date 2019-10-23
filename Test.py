@@ -8,5 +8,4 @@ p = Puzzle8(test)
 
 search = Search()
 
-print(Utility.get_hurestic1(p))
-print(Utility.get_hurestic2(p))
+search.a_star(p)
