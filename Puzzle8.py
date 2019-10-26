@@ -22,6 +22,13 @@ class Puzzle8:
     def get_priority(self):
         return len(self.state_stack)
 
+    # comparing two objects
+    def __lt__(self, other):
+        if len(other.state_stack) > len(self.state_stack):
+            return False
+
+        return True
+
     def expand(self):
         # taking a copy of current state of this 8-puzzle
 
