@@ -37,6 +37,13 @@ class Window(QtWidgets.QMainWindow):
         # event handling
         self.ui.loadImageBtn.clicked.connect(self.getfile)
         self.ui.randomBrn.clicked.connect(self.start_randomly)
+        # self.ui.comboBox.currentIndexChanged.connect(self.combobox_changed)
+        # if you don't put [str] it return the index of combobox selected item
+        self.ui.comboBox.activated[str].connect(self.combobox_changed)
+        print(self.ui.comboBox.currentText())
+
+    def combobox_changed(self, text):
+        print(text)
 
     def start_randomly(self):
         random_list = self.get_random_list()
