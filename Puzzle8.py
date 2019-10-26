@@ -10,10 +10,21 @@ class Puzzle8:
     def __init__(self, data, state_stack=[]):
         self.data = data
         self.state_stack = state_stack
-        print(len(state_stack))
 
     def __str__(self):
         return str(self.data) + "\n\n"
+
+    def __eq__(self, other):
+        if self.data == other.data:
+            return True
+        else:
+            return False
+
+    def __lt__(self, other):
+        if len(self.state_stack) < len(other.state_stack):
+            return True
+        else:
+            return False
 
     def swap(self, _list, to, _from):
         _list[to], _list[_from] = _list[_from], _list[to]

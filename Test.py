@@ -3,13 +3,18 @@ from Search import Search
 import Utility
 import heapq
 
-test = [1, 2, 3, 4, 5, 0, 6, 7, 8]
+test = [1, 2, 3, 4, 5, 6, 0, 7, 8]
 
+test2 = [2, 1, 3, 4, 5, 6, 0, 7, 8]
+
+# print(test.__cmp__(test2))
 p = Puzzle8(test)
+p1 = Puzzle8(test2)
 
+# print(p.__cmp__(p1))
 search = Search()
-
-search.ids(p)
+# print( p < p1)
+search.a_star(p)
 
 # stack = []
 #
