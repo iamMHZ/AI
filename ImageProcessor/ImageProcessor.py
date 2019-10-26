@@ -1,5 +1,6 @@
 import cv2
 import pytesseract.pytesseract
+import numpy as np
 
 
 def show_image(window_name, frame, delay):
@@ -17,19 +18,34 @@ def load_image(image_path):
 def filter_image(frame):
     crop = 100
 
+    numbers = []
+
     for i in range(0, 300, crop):
         for j in range(0, 300, crop):
             roi = frame[i: i + crop, j: j + crop]
 
-            show_image('crop ', roi[5:90, 5:90], 1)
+            # pre processing
+            _, roi = cv2.threshold(roi, 20, 255, cv2.THRESH_BINARY)
+            kernel = np.ones((3, 3), np.int)
+            roi = cv2.erode(roi, kernel)
+            roi = cv2.GaussianBlur(roi, (3, 3), 0)
 
-            ocr(roi[5:90, 5:90])
+            # show_image('crop ', roi[5:90, 5:90], 0)
+
+            number = ocr(roi[5:90, 5:90])
+
+            numbers.append(number)
+
+    return numbers
 
 
-def image_parser(frame):
-    filter_image(frame)
+def image_parser(image_path):
+    # load image
+    frame = load_image(image_path)
 
-    # ocr(ret)
+    numbers = filter_image(frame)
+
+    return numbers
 
 
 def ocr(frame):
@@ -37,9 +53,11 @@ def ocr(frame):
                                          config='--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789')
     print(target)
 
+    return target
+
 
 if __name__ == '__main__':
-    path = './test1.png'
+    path = './test3.png'
 
     image = load_image(path)
 

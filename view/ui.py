@@ -26,9 +26,9 @@ class Ui_MainWindow(object):
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setObjectName("label1")
         self.gridLayout.addWidget(self.label1, 0, 0, 1, 1)
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 3, 1, 1)
+        self.label3 = QtWidgets.QLabel(self.centralwidget)
+        self.label3.setObjectName("label3")
+        self.gridLayout.addWidget(self.label3, 0, 3, 1, 1)
         self.label4 = QtWidgets.QLabel(self.centralwidget)
         self.label4.setObjectName("label4")
         self.gridLayout.addWidget(self.label4, 1, 0, 1, 1)
@@ -94,7 +94,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label1.setText(_translate("MainWindow", "TextLabel"))
-        self.label.setText(_translate("MainWindow", "TextLabel"))
+        self.label3.setText(_translate("MainWindow", "TextLabel"))
         self.label4.setText(_translate("MainWindow", "TextLabel"))
         self.label2.setText(_translate("MainWindow", "TextLabel"))
         self.label5.setText(_translate("MainWindow", "TextLabel"))
@@ -106,3 +106,6 @@ class Ui_MainWindow(object):
         self.endBtn.setText(_translate("MainWindow", "End"))
         self.randomBrn.setText(_translate("MainWindow", "Random"))
         self.loadImageBtn.setText(_translate("MainWindow", "Load Image"))
+
+        item_list = ["BFS", "DFS", "A*", "IDS"]
+        self.comboBox.addItems(item_list)
