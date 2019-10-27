@@ -106,6 +106,3 @@ class Ui_MainWindow(object):
         self.endBtn.setText(_translate("MainWindow", "End"))
         self.randomBrn.setText(_translate("MainWindow", "Random"))
         self.loadImageBtn.setText(_translate("MainWindow", "Load Image"))
-
-        item_list = ["BFS", "DFS", "A*", "IDS"]
-        self.comboBox.addItems(item_list)

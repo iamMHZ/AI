@@ -1,17 +1,13 @@
-import cv2
 import threading
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtGui import QPixmap, QImage
 from view.ui import Ui_MainWindow
 
-import sys
 import qdarkstyle
-import qimage2ndarray
-import multiprocessing
-from multiprocessing import Process
+
 import random
-from ImageProcessor.ImageProcessor import image_parser, load_image
+from ImageProcessor.ImageProcessor import image_parser
 
 
 # ♥
@@ -21,6 +17,12 @@ class Window(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.current_algorithm = self.ui.comboBox.currentText()
+        self.start_puzzle = self.get_random_list()
+
+        item_list = ["BFS", "DFS", "A*", "IDS"]
+        self.ui.comboBox.addItems(item_list)
 
         # put labels together for better control
         self.labels = []
@@ -34,34 +36,41 @@ class Window(QtWidgets.QMainWindow):
         self.labels.append(self.ui.label8)
         self.labels.append(self.ui.label9)
 
+        self.set_labels_text(self.start_puzzle)
+
         # event handling
         self.ui.loadImageBtn.clicked.connect(self.getfile)
         self.ui.randomBrn.clicked.connect(self.start_randomly)
+        self.ui.startBtn.clicked.connect(self.start)
+        self.ui.endBtn.clicked.connect(self.end)
+
         # self.ui.comboBox.currentIndexChanged.connect(self.combobox_changed)
+
         # if you don't put [str] it return the index of combobox selected item
         self.ui.comboBox.activated[str].connect(self.combobox_changed)
-        print(self.ui.comboBox.currentText())
 
     def combobox_changed(self, text):
-        print(text)
+        self.current_algorithm = text
 
     def start_randomly(self):
         random_list = self.get_random_list()
+        self.start_puzzle = random_list
         print(random_list)
         self.set_labels_text(random_list)
 
     def getfile(self):
         file = QFileDialog.getOpenFileName(None, 'Open file', '../ImageProcessor/', "Image files (*.jpg *.png)")
 
-        # checking if loaded an image
-        if len(file[0]) > 0:
+        path = file[0]
+        # checking if image path is valid
+        if len(path) > 0:
             print(file)
-            path = file[0]
 
             # load image:
             number_list = image_parser(path)
             print(number_list)
 
+            self.start_puzzle = number_list
             self.set_labels_text(number_list)
 
     def get_random_list(self):
@@ -72,6 +81,12 @@ class Window(QtWidgets.QMainWindow):
     def set_labels_text(self, number_list):
         for i, label in enumerate(self.labels):
             label.setText(str(number_list[i]))
+
+    def start(self):
+        pass
+
+    def end(self):
+        pass
 
 
 def main():
