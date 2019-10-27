@@ -32,7 +32,6 @@ class Search:
         while not queue_pro.empty():
             puzzle_help = queue_pro.get()[1]
             node_parent = tree_quene.get()[1]
-            print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
                 return puzzle_help, tree
@@ -45,41 +44,50 @@ class Search:
                 tree_quene.put((puzzle.get_priority(), node_help))
 
     def a_star(self, puzzle: Puzzle8):
-
+        tree_quene = PriorityQueue()
         queue_pro = PriorityQueue()
 
+        tree = Node(puzzle)
+        tree_quene.put((puzzle.get_priority() + Utility.get_hurestic1(puzzle), tree))
         queue_pro.put((puzzle.get_priority() + Utility.get_hurestic1(puzzle), puzzle))
 
         while not queue_pro.empty():
 
             puzzle_help = queue_pro.get()[1]
-            print(puzzle_help)
+            node_parent = tree_quene.get()[1]
 
             if Utility.is_goal(puzzle_help):
-                return puzzle_help
+                return puzzle_help, tree
 
             possible_states = puzzle_help.expand()
 
             for item in possible_states:
                 queue_pro.put((item.get_priority() + Utility.get_hurestic1(item), item))
+                node_help = Node(item, parent=node_parent)
+                tree_quene.put((item.get_priority() + Utility.get_hurestic1(item), node_help))
 
     def a_star_heuristic_2(self, puzzle: Puzzle8):
-
+        tree_quene = PriorityQueue()
         queue_pro = PriorityQueue()
 
+        tree = Node(puzzle)
+        tree_quene.put((puzzle.get_priority() + Utility.get_hurestic2(puzzle), tree))
         queue_pro.put((puzzle.get_priority() + Utility.get_hurestic2(puzzle), puzzle))
 
         while not queue_pro.empty():
 
             puzzle_help = queue_pro.get()[1]
+            node_parent = tree_quene.get()[1]
 
             if Utility.is_goal(puzzle_help):
-                return puzzle_help
+                return puzzle_help, tree
 
             possible_states = puzzle_help.expand()
 
             for item in possible_states:
                 queue_pro.put((item.get_priority() + Utility.get_hurestic2(item), item))
+                node_help = Node(item, parent=node_parent)
+                tree_quene.put((item.get_priority() + Utility.get_hurestic2(item), node_help))
 
     def ids(self, puzzle: Puzzle8):
 
@@ -88,35 +96,49 @@ class Search:
         while True:
 
             # add initial state to queue:
+            tree_quene = LifoQueue()
             stack = LifoQueue()
+
+            tree = Node(puzzle)
+
+            tree_quene.put(tree)
             stack.put(puzzle)
+
             while not stack.empty():
                 puzzle_help = stack.get()
-                print(puzzle_help)
+                node_parent = tree_quene.get()
 
                 if Utility.is_goal(puzzle_help):
-                    return puzzle_help
+                    return puzzle_help, tree
 
                 possible_states = puzzle_help.expand()
 
                 for state in possible_states:
                     if state.get_priority() <= counter:
                         stack.put(state)
+                        node_help = Node(state, parent=node_parent)
+                        tree_quene.put(node_help)
             counter += 1
 
     def ida_star(self, puzzle: Puzzle8):
         cutoff = Utility.get_hurestic1(puzzle)
 
         while True:
+
+            tree_quene = LifoQueue()
             stack = LifoQueue()
+
+            tree = Node(puzzle)
+
+            tree_quene.put(tree)
             stack.put(puzzle)
 
             while not stack.empty():
                 puzzle_help = stack.get()
-                print(puzzle_help)
+                node_parent = tree_quene.get()
 
                 if Utility.is_goal(puzzle_help):
-                    return puzzle_help
+                    return puzzle_help, tree
 
                 possible_states = puzzle_help.expand()
 
@@ -124,9 +146,9 @@ class Search:
                     pri = state.get_priority() + Utility.get_hurestic1(state)
                     if pri < cutoff:
                         stack.put(state)
+                        node_help = Node(state, parent=node_parent)
+                        tree_quene.put(node_help)
             cutoff += 1
-
-        pass
 
     def help_search(self, collect, puzzle, tree_quene):
         # add initial state to queue:
@@ -136,10 +158,9 @@ class Search:
         while not collect.empty():
             puzzle_help = collect.get()
             node_parent = tree_quene.get()
-            print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-               return puzzle_help, tree
+                return puzzle_help, tree
 
             possible_states = puzzle_help.expand()
 
