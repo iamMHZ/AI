@@ -15,7 +15,6 @@ from multiprocessing.pool import ThreadPool
 from multiprocessing import Process, Queue
 from concurrent.futures import ThreadPoolExecutor
 from interface import implements
-from model.Utility import OnDataReceived
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
