@@ -1,6 +1,7 @@
 # it is class puzzle8
 import numpy as np
 
+
 class Puzzle8:
 
     def __init__(self, data, state_stack=[]):
