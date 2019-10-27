@@ -12,6 +12,8 @@ from multiprocessing.pool import ThreadPool
 from multiprocessing import Queue
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5 import QtWidgets
+import time
+from multiprocessing import Process
 
 
 class ThreadHandler(QThread):
@@ -134,9 +136,7 @@ class Window(QtWidgets.QMainWindow):
 
     def on_received(self, item):
         threading.Thread(target=self.display_tree, args=(item[1],)).start()
-        self.set_label_when_find_goal(item[0])
-
-
+        self.set_label_when_find_goal(item[0].state_stack)
 
     def start(self):
         puzzle = Puzzle8(self.start_puzzle_date)
@@ -172,17 +172,17 @@ class Window(QtWidgets.QMainWindow):
     def end(self):
         self.qThread.terminate()
 
-    def set_label_when_find_goal(self, ls):
-        for tup in ls:
-            index0 = tup[0]
-            index1 = tup[1]
-            data1 = self.labels[index0]
-            data2 = self.labels[index1]
+    def set_label_when_find_goal(self, stack):
+        for item in stack:
+            index0 = item[0]
+            index1 = item[1]
+            data1 = self.labels[index0].text()
+            data2 = self.labels[index1].text()
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
 
-
     def display_tree(self, tree):
+        # DotExporter(tree).to_dotfile("tree.dot")
         DotExporter(tree).to_picture("tree.png")
 
 
