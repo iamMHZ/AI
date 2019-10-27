@@ -13,7 +13,10 @@ class Search:
 
     def bfs(self, puzzle: Puzzle8):
         queue_bfs = Queue()
-        return self.help_search(queue_bfs, puzzle)
+
+        result = self.help_search(queue_bfs, puzzle)
+
+        return result
 
     def dfs(self, puzzle: Puzzle8):
         stack = LifoQueue()
@@ -129,7 +132,7 @@ class Search:
             print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-               return puzzle_help
+                return puzzle_help
 
             possible_states = puzzle_help.expand()
 
