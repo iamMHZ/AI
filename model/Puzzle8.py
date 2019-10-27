@@ -1,5 +1,5 @@
 # it is class puzzle8
-
+import numpy as np
 
 class Puzzle8:
 
@@ -8,7 +8,9 @@ class Puzzle8:
         self.state_stack = state_stack
 
     def __str__(self):
-        return str(self.data) + "\n\n"
+        matrix = np.reshape(self.data, (3, 3))
+        # create myprint
+        return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(self.data[6:9])
 
     def __eq__(self, other):
         if self.data == other.data:
