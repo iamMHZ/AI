@@ -1,7 +1,5 @@
-from Puzzle8 import Puzzle8
-from Search import Search
-import Utility
-import heapq
+from model.Puzzle8 import Puzzle8
+from model.Search import Search
 
 test = [1, 2, 3, 4, 5, 6, 0, 7, 8]
 

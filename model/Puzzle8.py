@@ -1,5 +1,5 @@
 import queue
-from Movement import Movement
+from model.Movement import Movement
 
 
 # it is class puzzle8

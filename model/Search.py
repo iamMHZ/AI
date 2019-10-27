@@ -1,9 +1,8 @@
 from queue import Queue
 from queue import LifoQueue
 from queue import PriorityQueue
-import Utility
-from Puzzle8 import Puzzle8
-import heapq
+from model import Utility
+from model.Puzzle8 import Puzzle8
 
 
 class Search:
