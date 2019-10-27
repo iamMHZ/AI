@@ -9,9 +9,9 @@ def get_hurestic1(puzzle):
     c = 0
     index = 0
     for i in puzzle.data:
-            if i != goal[index]:
-                c+=1
-            index += 1
+        if i != goal[index]:
+            c += 1
+        index += 1
     return c
 
 

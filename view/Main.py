@@ -8,6 +8,9 @@ import qdarkstyle
 
 import random
 from ImageProcessor.ImageProcessor import image_parser
+from model.Search import Search
+from model.Puzzle8 import Puzzle8
+from multiprocessing.pool import ThreadPool
 
 
 # ♥
@@ -17,12 +20,13 @@ class Window(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.search = Search()
+
+        item_list = ["BFS", "DFS", "UCS", "A*", "IDS", "IDA*"]
+        self.ui.comboBox.addItems(item_list)
 
         self.current_algorithm = self.ui.comboBox.currentText()
-        self.start_puzzle = self.get_random_list()
-
-        item_list = ["BFS", "DFS", "A*", "IDS"]
-        self.ui.comboBox.addItems(item_list)
+        self.start_puzzle_date = self.get_random_list()
 
         # put labels together for better control
         self.labels = []
@@ -36,7 +40,7 @@ class Window(QtWidgets.QMainWindow):
         self.labels.append(self.ui.label8)
         self.labels.append(self.ui.label9)
 
-        self.set_labels_text(self.start_puzzle)
+        self.set_labels_text(self.start_puzzle_date)
 
         # event handling
         self.ui.loadImageBtn.clicked.connect(self.getfile)
@@ -54,7 +58,7 @@ class Window(QtWidgets.QMainWindow):
 
     def start_randomly(self):
         random_list = self.get_random_list()
-        self.start_puzzle = random_list
+        self.start_puzzle_date = random_list
         print(random_list)
         self.set_labels_text(random_list)
 
@@ -70,7 +74,7 @@ class Window(QtWidgets.QMainWindow):
             number_list = image_parser(path)
             print(number_list)
 
-            self.start_puzzle = number_list
+            self.start_puzzle_date = number_list
             self.set_labels_text(number_list)
 
     def get_random_list(self):
@@ -83,7 +87,11 @@ class Window(QtWidgets.QMainWindow):
             label.setText(str(number_list[i]))
 
     def start(self):
-        pass
+        puzzle = Puzzle8(self.start_puzzle_date)
+        print(self.current_algorithm)
+        if self.current_algorithm == 'BFS':
+            thread = threading.Thread(target=self.search.bfs, args=(puzzle,))
+            thread.start()
 
     def end(self):
         pass

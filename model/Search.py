@@ -55,8 +55,6 @@ class Search:
             for item in possible_states:
                 queue_pro.put((item.get_priority() + Utility.get_hurestic1(item), item))
 
-
-
     def a_star_heuristic_2(self, puzzle: Puzzle8):
 
         queue_pro = PriorityQueue()
@@ -75,7 +73,6 @@ class Search:
 
             for item in possible_states:
                 queue_pro.put((item.get_priority() + Utility.get_hurestic2(item), item))
-
 
     def ids(self, puzzle: Puzzle8):
 
