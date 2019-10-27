@@ -11,6 +11,7 @@ from ImageProcessor.ImageProcessor import image_parser
 from model.Search import Search
 from model.Puzzle8 import Puzzle8
 from multiprocessing.pool import ThreadPool
+from multiprocessing import Process
 
 
 # ♥
@@ -21,6 +22,7 @@ class Window(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.search = Search()
+        self.process = None
 
         item_list = ["BFS", "DFS", "UCS", "A*", "IDS", "IDA*"]
         self.ui.comboBox.addItems(item_list)
@@ -90,11 +92,31 @@ class Window(QtWidgets.QMainWindow):
         puzzle = Puzzle8(self.start_puzzle_date)
         print(self.current_algorithm)
         if self.current_algorithm == 'BFS':
-            thread = threading.Thread(target=self.search.bfs, args=(puzzle,))
-            thread.start()
+
+            self.process = Process(target=self.search.bfs, args=(puzzle,))
+            self.process.start()
+
+        elif self.current_algorithm == 'DFS':
+            self.process = Process(target=self.search.dfs, args=(puzzle,))
+            self.process.start()
+        elif self.current_algorithm == 'UCS':
+            self.process = Process(target=self.search.ucs, args=(puzzle,))
+            self.process.start()
+        elif self.current_algorithm == 'A*':
+            self.process = Process(target=self.search.a_star, args=(puzzle,))
+            self.process.start()
+        elif self.current_algorithm == 'IDS':
+            self.process = Process(target=self.search.ids, args=(puzzle,))
+            self.process.start()
+        elif self.current_algorithm == 'IDA*':
+            self.process = Process(target=self.search.ida_star, args=(puzzle,))
+            self.process.start()
 
     def end(self):
-        pass
+        if self.process:
+            self.process.terminate()
+            # deleting process from memory
+            del self.process
 
 
 def main():

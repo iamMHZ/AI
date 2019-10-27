@@ -45,6 +45,7 @@ class Search:
         while not queue_pro.empty():
 
             puzzle_help = queue_pro.get()[1]
+            print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
                 print("GOAL Found ")
