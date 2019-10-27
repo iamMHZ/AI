@@ -12,11 +12,11 @@ class Search:
 
     def bfs(self, puzzle: Puzzle8):
         queue_bfs = Queue()
-        self.help_search(queue_bfs, puzzle)
+        return self.help_search(queue_bfs, puzzle)
 
     def dfs(self, puzzle: Puzzle8):
         stack = LifoQueue()
-        self.help_search(stack, puzzle)
+        return self.help_search(stack, puzzle)
 
     def ucs(self, puzzle: Puzzle8):
         queue_pro = PriorityQueue()
@@ -28,8 +28,7 @@ class Search:
             print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-                print("GOAL Found ")
-                return
+                return puzzle_help
 
             possible_states = puzzle_help.expand()
 
@@ -48,8 +47,7 @@ class Search:
             print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-                print("GOAL Found ")
-                return
+                return puzzle_help
 
             possible_states = puzzle_help.expand()
 
@@ -67,8 +65,7 @@ class Search:
             puzzle_help = queue_pro.get()[1]
 
             if Utility.is_goal(puzzle_help):
-                print("GOAL Found ")
-                return
+                return puzzle_help
 
             possible_states = puzzle_help.expand()
 
@@ -89,8 +86,7 @@ class Search:
                 print(puzzle_help)
 
                 if Utility.is_goal(puzzle_help):
-                    print("GOAL Found ")
-                    return
+                    return puzzle_help
 
                 possible_states = puzzle_help.expand()
 
@@ -111,8 +107,7 @@ class Search:
                 print(puzzle_help)
 
                 if Utility.is_goal(puzzle_help):
-                    print("GOAL Found ")
-                    return
+                    return puzzle_help
 
                 possible_states = puzzle_help.expand()
 
@@ -133,8 +128,7 @@ class Search:
             print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-                print("GOAL Found ")
-                return
+               return puzzle_help
 
             possible_states = puzzle_help.expand()
 
