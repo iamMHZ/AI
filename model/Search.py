@@ -12,32 +12,37 @@ class Search:
         pass
 
     def bfs(self, puzzle: Puzzle8):
+        queue_tree = Queue()
         queue_bfs = Queue()
-
-        result = self.help_search(queue_bfs, puzzle)
-
-        return result
+        return self.help_search(queue_bfs, puzzle, queue_tree)
 
     def dfs(self, puzzle: Puzzle8):
+        queue_tree = LifoQueue()
         stack = LifoQueue()
-        return self.help_search(stack, puzzle)
+        return self.help_search(stack, puzzle, queue_tree)
 
     def ucs(self, puzzle: Puzzle8):
+        tree_quene = PriorityQueue()
         queue_pro = PriorityQueue()
 
+        tree = Node(puzzle)
+        tree_quene.put((puzzle.get_priority(), tree))
         queue_pro.put((puzzle.get_priority(), puzzle))
 
         while not queue_pro.empty():
             puzzle_help = queue_pro.get()[1]
+            node_parent = tree_quene.get()[1]
             print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-                return puzzle_help
+                return puzzle_help, tree
 
             possible_states = puzzle_help.expand()
 
             for p in possible_states:
                 queue_pro.put((puzzle.get_priority(), p))
+                node_help = Node(p, parent=node_parent)
+                tree_quene.put((puzzle.get_priority(), node_help))
 
     def a_star(self, puzzle: Puzzle8):
 
@@ -123,18 +128,22 @@ class Search:
 
         pass
 
-    def help_search(self, collect, puzzle):
+    def help_search(self, collect, puzzle, tree_quene):
         # add initial state to queue:
         collect.put(puzzle)
-
+        tree = Node(puzzle)
+        tree_quene.put(tree)
         while not collect.empty():
             puzzle_help = collect.get()
+            node_parent = tree_quene.get()
             print(puzzle_help)
 
             if Utility.is_goal(puzzle_help):
-                return puzzle_help
+               return puzzle_help, tree
 
             possible_states = puzzle_help.expand()
 
             for state in possible_states:
                 collect.put(state)
+                node_help = Node(state, parent=node_parent)
+                tree_quene.put(node_help)

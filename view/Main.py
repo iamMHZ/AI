@@ -1,25 +1,17 @@
 # ♥
-import threading
-
 from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtGui import QPixmap, QImage
 from view.ui import Ui_MainWindow
-
+from anytree.exporter import DotExporter
 import qdarkstyle
-
+import threading
 import random
 from ImageProcessor.ImageProcessor import image_parser
 from model.Search import Search
 from model.Puzzle8 import Puzzle8
 from multiprocessing.pool import ThreadPool
-from multiprocessing import Process, Queue
-from concurrent.futures import ThreadPoolExecutor
-from interface import implements
-from model.Utility import OnDataReceived
+from multiprocessing import Queue
 from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5 import QtGui
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QPushButton
 
 
 class ThreadHandler(QThread):
@@ -78,7 +70,7 @@ class Window(QtWidgets.QMainWindow):
 
         self.current_algorithm = self.ui.comboBox.currentText()
         # self.start_puzzle_date = self.get_random_list()
-        self.start_puzzle_date = self.get_random_list()
+        self.start_puzzle_date = [1, 2, 3, 4, 5, 6, 7, 0, 8]
 
         # put labels together for better control
         self.labels = []
@@ -114,7 +106,6 @@ class Window(QtWidgets.QMainWindow):
     def start_randomly(self):
         random_list = self.get_random_list()
         self.start_puzzle_date = random_list
-        print(random_list)
         self.set_labels_text(random_list)
 
     def getfile(self):
@@ -142,8 +133,10 @@ class Window(QtWidgets.QMainWindow):
             label.setText(str(number_list[i]))
 
     def on_received(self, item):
-        print()
-        print("DONE")
+        threading.Thread(target=self.display_tree, args=(item[1],)).start()
+        self.set_label_when_find_goal(item[0])
+
+
 
     def start(self):
         puzzle = Puzzle8(self.start_puzzle_date)
@@ -156,61 +149,38 @@ class Window(QtWidgets.QMainWindow):
         self.qThread.set_algorithm_type(self.current_algorithm)
         self.qThread.set_puzzle(puzzle)
         if self.current_algorithm == 'BFS':
-
-            # self.process = Process(target=self.search.bfs, args=(puzzle,))
-            # self.process.start()
-
-            # apply_async = self.pool.apply_async(target=self.search.dfs, args=(puzzle,))
-            # puzzle = apply_async.get()
-
-            # executor = ThreadPoolExecutor(2)
-            # future = executor.submit(self.search.bfs, (puzzle,))
-            # print(future.done())
-            # print(future.result())
-
-            # qThread = ThreadHandler(puzzle)
-            # qThread.signal.connect(self.on_received)
-
             self.qThread.start()
 
         elif self.current_algorithm == 'DFS':
-            # self.process = Process(target=self.search.dfs, args=(puzzle,))
-            # self.process.start()
-
             self.qThread.start()
 
         elif self.current_algorithm == 'UCS':
-            # self.process = Process(target=self.search.ucs, args=(puzzle,))
-            # self.process.start()
-
             self.qThread.start()
 
         elif self.current_algorithm == 'A*':
-            # self.process = Process(target=self.search.a_star, args=(puzzle,))
-            # self.process.start()
-
             self.qThread.start()
 
         elif self.current_algorithm == 'IDS':
-            # self.process = Process(target=self.search.ids, args=(puzzle,))
-            # self.process.start()
-
             self.qThread.start()
 
         elif self.current_algorithm == 'IDA*':
-            # self.process = Process(target=self.search.ida_star, args=(puzzle,))
-            # self.process.start()
-
             self.qThread.start()
 
     def end(self):
-        # if self.process:
-        #     self.process.terminate()
-        #     # self.pool.close()
-        #     # deleting process from memory
-        #     del self.process
-
         self.qThread.terminate()
+
+    def set_label_when_find_goal(self, ls):
+        for tup in ls:
+            index0 = tup[0]
+            index1 = tup[1]
+            data1 = self.labels[index0]
+            data2 = self.labels[index1]
+            self.labels[index0].setText(data2)
+            self.labels[index1].setText(data1)
+
+
+    def display_tree(self, tree):
+        DotExporter(tree).to_picture("tree.png")
 
 
 def main():

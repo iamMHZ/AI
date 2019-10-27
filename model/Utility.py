@@ -1,5 +1,3 @@
-from interface import Interface
-
 goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
 
 
@@ -25,9 +23,3 @@ def get_hurestic2(puzzle):
         c += help // 3
         c += help % 3
     return c
-
-
-class OnDataReceived(Interface):
-
-    def on_received(self, item):
-        pass
