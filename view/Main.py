@@ -215,6 +215,7 @@ class Window(QtWidgets.QMainWindow):
         self.image_thread.set_algorithm_name(self.current_algorithm)
         self.image_thread.set_tree(tree)
         self.image_thread.start()
+
         self.show_tree_to_text(tree)
         self.set_label_when_find_goal(item[0].state_stack)
 
