@@ -136,7 +136,7 @@ class Window(QtWidgets.QMainWindow):
         self.set_labels_text(random_list)
 
     def getfile(self):
-        file = QFileDialog.getOpenFileName(None, 'Open file', '../ImageProcessor/', "Image files (*.jpg *.png)")
+        file = QFileDialog.getOpenFileName(None, 'Open file', '../ImageProcessor/imageTemplates/', "Image files (*.jpg *.png)")
 
         path = file[0]
         # checking if image path is valid
@@ -157,7 +157,7 @@ class Window(QtWidgets.QMainWindow):
 
     def set_labels_text(self, number_list):
         for i, label in enumerate(self.labels):
-            label.setText(str(number_list[i]))
+           label.setText(str(number_list[i]))
 
     def start(self):
         puzzle = Puzzle8(self.start_puzzle_date)
