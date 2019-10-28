@@ -72,7 +72,7 @@ class Window(QtWidgets.QMainWindow):
 
         self.current_algorithm = self.ui.comboBox.currentText()
         # self.start_puzzle_date = self.get_random_list()
-        self.start_puzzle_date = [1, 2, 3, 4, 5, 6, 7, 0, 8]
+        self.start_puzzle_date = [1, 2, 3, 4, 5, 6, 0, 7, 8]
 
         # put labels together for better control
         self.labels = []
