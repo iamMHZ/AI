@@ -1,15 +1,14 @@
 # ♥
 from PyQt5.QtWidgets import QFileDialog
 from view.ui import Ui_MainWindow
+from anytree import RenderTree
 from anytree.exporter import DotExporter
 import qdarkstyle
-import threading
 import random
 from ImageProcessor.ImageProcessor import image_parser, load_image, show_image
 from model.Search import Search
 from model.Puzzle8 import Puzzle8
-
-from multiprocessing import Queue
+from model.Utility import printer
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5 import QtWidgets
 
@@ -204,12 +203,19 @@ class Window(QtWidgets.QMainWindow):
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
 
+    def show_tree_to_text(self, tree):
+        text = ""
+        for pre, fill, node in RenderTree(tree):
+            text += ("%s%s\n" % (pre, printer(str(node.name))))
+
+        self.ui.textEdit.setText(text)
+
     def on_received(self, item):
         tree = item[1]
         self.image_thread.set_algorithm_name(self.current_algorithm)
         self.image_thread.set_tree(tree)
         self.image_thread.start()
-
+        self.show_tree_to_text(tree)
         self.set_label_when_find_goal(item[0].state_stack)
 
     def on_tree_recived(self, path):

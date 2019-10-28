@@ -1,4 +1,4 @@
-from anytree import Node, RenderTree
+from utility.MyNode import MyNode
 from queue import Queue
 from queue import LifoQueue
 from queue import PriorityQueue
@@ -25,7 +25,7 @@ class Search:
         tree_quene = PriorityQueue()
         queue_pro = PriorityQueue()
 
-        tree = Node(puzzle)
+        tree = MyNode(puzzle)
         tree_quene.put((puzzle.get_priority(), tree))
         queue_pro.put((puzzle.get_priority(), puzzle))
 
@@ -40,14 +40,14 @@ class Search:
 
             for p in possible_states:
                 queue_pro.put((puzzle.get_priority(), p))
-                node_help = Node(p, parent=node_parent)
+                node_help = MyNode(p, parent=node_parent)
                 tree_quene.put((puzzle.get_priority(), node_help))
 
     def a_star(self, puzzle: Puzzle8):
         tree_quene = PriorityQueue()
         queue_pro = PriorityQueue()
 
-        tree = Node(puzzle)
+        tree = MyNode(puzzle)
         tree_quene.put((puzzle.get_priority() + Utility.get_hurestic1(puzzle), tree))
         queue_pro.put((puzzle.get_priority() + Utility.get_hurestic1(puzzle), puzzle))
 
@@ -63,14 +63,14 @@ class Search:
 
             for item in possible_states:
                 queue_pro.put((item.get_priority() + Utility.get_hurestic1(item), item))
-                node_help = Node(item, parent=node_parent)
+                node_help = MyNode(item, parent=node_parent)
                 tree_quene.put((item.get_priority() + Utility.get_hurestic1(item), node_help))
 
     def a_star_heuristic_2(self, puzzle: Puzzle8):
         tree_quene = PriorityQueue()
         queue_pro = PriorityQueue()
 
-        tree = Node(puzzle)
+        tree = MyNode(puzzle)
         tree_quene.put((puzzle.get_priority() + Utility.get_hurestic2(puzzle), tree))
         queue_pro.put((puzzle.get_priority() + Utility.get_hurestic2(puzzle), puzzle))
 
@@ -86,7 +86,7 @@ class Search:
 
             for item in possible_states:
                 queue_pro.put((item.get_priority() + Utility.get_hurestic2(item), item))
-                node_help = Node(item, parent=node_parent)
+                node_help = MyNode(item, parent=node_parent)
                 tree_quene.put((item.get_priority() + Utility.get_hurestic2(item), node_help))
 
     def ids(self, puzzle: Puzzle8):
@@ -99,7 +99,7 @@ class Search:
             tree_quene = LifoQueue()
             stack = LifoQueue()
 
-            tree = Node(puzzle)
+            tree = MyNode(puzzle)
 
             tree_quene.put(tree)
             stack.put(puzzle)
@@ -116,7 +116,7 @@ class Search:
                 for state in possible_states:
                     if state.get_priority() <= counter:
                         stack.put(state)
-                        node_help = Node(state, parent=node_parent)
+                        node_help = MyNode(state, parent=node_parent)
                         tree_quene.put(node_help)
             counter += 1
 
@@ -128,7 +128,7 @@ class Search:
             tree_quene = LifoQueue()
             stack = LifoQueue()
 
-            tree = Node(puzzle)
+            tree = MyNode(puzzle)
 
             tree_quene.put(tree)
             stack.put(puzzle)
@@ -146,14 +146,14 @@ class Search:
                     pri = state.get_priority() + Utility.get_hurestic1(state)
                     if pri < cutoff:
                         stack.put(state)
-                        node_help = Node(state, parent=node_parent)
+                        node_help = MyNode(state, parent=node_parent)
                         tree_quene.put(node_help)
             cutoff += 1
 
     def help_search(self, collect, puzzle, tree_quene):
         # add initial state to queue:
         collect.put(puzzle)
-        tree = Node(puzzle)
+        tree = MyNode(puzzle)
         tree_quene.put(tree)
         while not collect.empty():
             puzzle_help = collect.get()
@@ -166,5 +166,5 @@ class Search:
 
             for state in possible_states:
                 collect.put(state)
-                node_help = Node(state, parent=node_parent)
+                node_help = MyNode(state, parent=node_parent)
                 tree_quene.put(node_help)
