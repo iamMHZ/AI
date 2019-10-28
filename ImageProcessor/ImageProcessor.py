@@ -34,7 +34,11 @@ def filter_image(frame):
 
             number = ocr(roi[5:90, 5:90])
 
-            numbers.append(number)
+            # converting str to int
+            if number == '':
+                numbers.append(0)
+            else:
+                numbers.append(int(number))
 
     return numbers
 

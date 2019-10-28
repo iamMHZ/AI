@@ -16,7 +16,7 @@ import time
 from multiprocessing import Process
 
 
-class ThreadHandler(QThread):
+class AlgorithmThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
 
     def __init__(self, puzzle):
@@ -99,7 +99,7 @@ class Window(QtWidgets.QMainWindow):
         # if you don't put [str] it return the index of combobox selected item
         self.ui.comboBox.activated[str].connect(self.combobox_changed)
 
-        self.qThread = ThreadHandler(Puzzle8(self.start_puzzle_date))
+        self.qThread = AlgorithmThread(Puzzle8(self.start_puzzle_date))
         self.qThread.signal.connect(self.on_received)
 
     def combobox_changed(self, text):
