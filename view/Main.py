@@ -9,7 +9,7 @@ from ImageProcessor.ImageProcessor import image_parser, load_image, show_image
 from model.Search import Search
 from model.Puzzle8 import Puzzle8
 from model.Utility import printer
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5 import QtWidgets
 
 
@@ -208,7 +208,7 @@ class Window(QtWidgets.QMainWindow):
         for pre, fill, node in RenderTree(tree):
             text += ("%s%s\n" % (pre, printer(str(node.name))))
 
-        self.ui.textEdit.setText(text)
+        self.ui.textLabel.setText(text)
 
     def on_received(self, item):
         tree = item[1]
