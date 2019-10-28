@@ -23,3 +23,9 @@ def get_hurestic2(puzzle):
         c += help // 3
         c += help % 3
     return c
+
+
+def printer(pri: str):
+    p_help = pri.split("\n")
+    f = str(p_help).replace("]', '[", ", ").replace("['[", "[").replace("]']", "]")
+    return f
