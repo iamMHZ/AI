@@ -91,7 +91,7 @@ class Window(QtWidgets.QMainWindow):
 
         self.current_algorithm = self.ui.comboBox.currentText()
         # self.start_puzzle_date = self.get_random_list()
-        self.start_puzzle_date = [1, 2, 3, 0, 4, 6, 7, 5, 8]
+        self.start_puzzle_date = [2, 0, 4, 1, 5, 3, 7, 8, 6]
 
         # put labels together for better control
         self.labels = []
@@ -213,7 +213,6 @@ class Window(QtWidgets.QMainWindow):
         self.set_label_when_find_goal(item[0].state_stack)
 
     def on_tree_recived(self, path):
-
         image = load_image(path)
         show_image(self.current_algorithm, image, 0)
 
