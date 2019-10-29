@@ -5,8 +5,8 @@ from PyQt5.QtGui import QDrag, QPixmap, QPainter, QCursor
 from PyQt5.QtCore import QMimeData, Qt
 
 
-
 class DraggableDroppableLabel(QLabel):
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.drag_start_position = event.pos()
