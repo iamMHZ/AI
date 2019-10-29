@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from utility.MyLabel import DraggableDroppableLabel
 
 
 class Ui_MainWindow(object):
@@ -24,7 +25,7 @@ class Ui_MainWindow(object):
         self.gridLayout.setContentsMargins(3, 3, 3, 3)
         self.gridLayout.setSpacing(3)
         self.gridLayout.setObjectName("gridLayout")
-        self.label1 = QtWidgets.QLabel(self.centralwidget)
+        self.label1 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -36,7 +37,7 @@ class Ui_MainWindow(object):
         self.label1.setAlignment(QtCore.Qt.AlignCenter)
         self.label1.setObjectName("label1")
         self.gridLayout.addWidget(self.label1, 0, 0, 1, 1)
-        self.label3 = QtWidgets.QLabel(self.centralwidget)
+        self.label3 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -48,7 +49,7 @@ class Ui_MainWindow(object):
         self.label3.setAlignment(QtCore.Qt.AlignCenter)
         self.label3.setObjectName("label3")
         self.gridLayout.addWidget(self.label3, 0, 3, 1, 1)
-        self.label4 = QtWidgets.QLabel(self.centralwidget)
+        self.label4 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -60,7 +61,7 @@ class Ui_MainWindow(object):
         self.label4.setAlignment(QtCore.Qt.AlignCenter)
         self.label4.setObjectName("label4")
         self.gridLayout.addWidget(self.label4, 1, 0, 1, 1)
-        self.label2 = QtWidgets.QLabel(self.centralwidget)
+        self.label2 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -72,7 +73,7 @@ class Ui_MainWindow(object):
         self.label2.setAlignment(QtCore.Qt.AlignCenter)
         self.label2.setObjectName("label2")
         self.gridLayout.addWidget(self.label2, 0, 1, 1, 1)
-        self.label5 = QtWidgets.QLabel(self.centralwidget)
+        self.label5 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -84,7 +85,7 @@ class Ui_MainWindow(object):
         self.label5.setAlignment(QtCore.Qt.AlignCenter)
         self.label5.setObjectName("label5")
         self.gridLayout.addWidget(self.label5, 1, 1, 1, 1)
-        self.label6 = QtWidgets.QLabel(self.centralwidget)
+        self.label6 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -96,7 +97,7 @@ class Ui_MainWindow(object):
         self.label6.setAlignment(QtCore.Qt.AlignCenter)
         self.label6.setObjectName("label6")
         self.gridLayout.addWidget(self.label6, 1, 3, 1, 1)
-        self.label7 = QtWidgets.QLabel(self.centralwidget)
+        self.label7 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -108,7 +109,7 @@ class Ui_MainWindow(object):
         self.label7.setAlignment(QtCore.Qt.AlignCenter)
         self.label7.setObjectName("label7")
         self.gridLayout.addWidget(self.label7, 2, 0, 1, 1)
-        self.label8 = QtWidgets.QLabel(self.centralwidget)
+        self.label8 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -120,7 +121,7 @@ class Ui_MainWindow(object):
         self.label8.setAlignment(QtCore.Qt.AlignCenter)
         self.label8.setObjectName("label8")
         self.gridLayout.addWidget(self.label8, 2, 1, 1, 1)
-        self.label9 = QtWidgets.QLabel(self.centralwidget)
+        self.label9 = DraggableDroppableLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)

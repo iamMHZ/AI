@@ -16,6 +16,16 @@ from utility.Thread import ImageThread, AlgorithmThread
 
 class Window(QtWidgets.QMainWindow):
 
+    def update_after_drag(self):
+
+        new_list = []
+        for label in self.labels:
+            text = label.text()
+            new_list.append(int(text))
+
+        self.start_puzzle_date = new_list
+        print(new_list)
+
     def __init__(self, ):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -97,6 +107,8 @@ class Window(QtWidgets.QMainWindow):
             label.setText(str(number_list[i]))
 
     def start(self):
+        self.update_after_drag()
+
         puzzle = Puzzle8(self.start_puzzle_date)
         print(self.current_algorithm)
 
