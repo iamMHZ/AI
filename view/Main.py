@@ -185,7 +185,7 @@ def main():
     window = Window()
     window.show()
 
-    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     app.exec_()
 
 
