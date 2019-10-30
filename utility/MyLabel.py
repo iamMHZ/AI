@@ -1,11 +1,25 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget
-from PyQt5.QtGui import QDrag, QPixmap, QPainter, QCursor
-from PyQt5.QtCore import QMimeData, Qt
+from PyQt5.QtGui import QDrag, QPixmap, QPainter, QColor
+from PyQt5.QtCore import QMimeData, Qt, QPropertyAnimation, QRect, QVariantAnimation
 
 
 class DraggableDroppableLabel(QLabel):
+
+    def __init__(self, widget_type):
+        super().__init__(widget_type)
+
+        # self.animation = QPropertyAnimation(self, b'color')
+        # self.animation.setDuration(1000)
+        # self.animation.setLoopCount(2)
+        # self.animation.setStartValue(QColor(0, 0, 0))
+        # self.animation.setEndValue(QColor(250, 250, 250))
+
+        # self.anim = QPropertyAnimation(self, b"geometry")
+        # self.anim.setDuration(10000)
+        # self.anim.setStartValue(QRect(150, 30, 100, 100))
+        # self.anim.setEndValue(QRect(150, 30, 200, 200))
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -47,6 +61,5 @@ class DraggableDroppableLabel(QLabel):
         self.setText(text)
 
         source.setText(old_text)
-        event.acceptProposedAction()
 
-        # Window.update_after_drag()
+        event.acceptProposedAction()

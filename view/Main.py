@@ -12,7 +12,9 @@ from model.Utility import printer
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5 import QtWidgets
 from utility.Thread import ImageThread, AlgorithmThread
-
+from PyQt5.QtGui import QColor
+from PyQt5.QtCore import QPropertyAnimation
+import time
 
 class Window(QtWidgets.QMainWindow):
 
@@ -36,7 +38,7 @@ class Window(QtWidgets.QMainWindow):
 
         self.current_algorithm = self.ui.comboBox.currentText()
         # self.start_puzzle_date = self.get_random_list()
-        self.start_puzzle_date = [2, 0, 4, 1, 5, 3, 7, 8, 6]
+        self.start_puzzle_date = [1, 2, 3, 4, 5, 6, 7, 0, 8]
 
         # put labels together for better control
         self.labels = []
@@ -147,8 +149,13 @@ class Window(QtWidgets.QMainWindow):
         for item in stack:
             index0 = item[0]
             index1 = item[1]
+
+            # self.labels[index0].animation.start()
+            # self.labels[index1].animation.start()
+
             data1 = self.labels[index0].text()
             data2 = self.labels[index1].text()
+
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
 
@@ -178,7 +185,7 @@ def main():
     window = Window()
     window.show()
 
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+    # app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     app.exec_()
 
 
