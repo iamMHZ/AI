@@ -8,8 +8,8 @@ import random
 from ImageProcessor.ImageProcessor import image_parser, load_image, show_image
 from model.Search import Search
 from model.Puzzle8 import Puzzle8
-from model.Utility import printer
-from PyQt5.QtCore import QThread, pyqtSignal, Qt
+from utility.Utility import printer
+from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5 import QtWidgets
 from utility.Thread import ImageThread, AlgorithmThread
 from PyQt5.QtGui import QColor

@@ -10,14 +10,10 @@ class Puzzle8:
 
     def __str__(self):
         matrix = np.reshape(self.data, (3, 3))
-        # create myprint
         return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(self.data[6:9])
 
     def __eq__(self, other):
-        if self.data == other.data:
-            return True
-        else:
-            return False
+        return self.data == other.data
 
     def __lt__(self, other):
         if len(self.state_stack) < len(other.state_stack):
@@ -25,19 +21,16 @@ class Puzzle8:
         else:
             return False
 
-    def swap(self, _list, to, _from):
-        _list[to], _list[_from] = _list[_from], _list[to]
-        return _list
+    # comparing two objects
+    def __lt__(self, other):
+        return len(other.state_stack) > len(self.state_stack)
 
     def get_priority(self):
         return len(self.state_stack)
 
-    # comparing two objects
-    def __lt__(self, other):
-        if len(other.state_stack) > len(self.state_stack):
-            return False
-
-        return True
+    def swap(self, _list, to, _from):
+        _list[to], _list[_from] = _list[_from], _list[to]
+        return _list
 
     def expand(self):
         # taking a copy of current state of this 8-puzzle

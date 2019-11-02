@@ -2,8 +2,9 @@ from utility.MyNode import MyNode
 from queue import Queue
 from queue import LifoQueue
 from queue import PriorityQueue
-from model import Utility
+from utility import Utility
 from model.Puzzle8 import Puzzle8
+import sys
 
 
 class Search:
@@ -14,12 +15,12 @@ class Search:
     def bfs(self, puzzle: Puzzle8):
         queue_tree = Queue()
         queue_bfs = Queue()
-        return self.help_search(queue_bfs, puzzle, queue_tree)
+        return Utility.help_search(queue_bfs, puzzle, queue_tree)
 
     def dfs(self, puzzle: Puzzle8):
         queue_tree = LifoQueue()
         stack = LifoQueue()
-        return self.help_search(stack, puzzle, queue_tree)
+        return Utility.help_search(stack, puzzle, queue_tree)
 
     def ucs(self, puzzle: Puzzle8):
         tree_quene = PriorityQueue()
@@ -150,21 +151,75 @@ class Search:
                         tree_quene.put(node_help)
             cutoff += 1
 
-    def help_search(self, collect, puzzle, tree_quene):
-        # add initial state to queue:
-        collect.put(puzzle)
-        tree = MyNode(puzzle)
-        tree_quene.put(tree)
-        while not collect.empty():
-            puzzle_help = collect.get()
-            node_parent = tree_quene.get()
-            print(puzzle_help)
-            if Utility.is_goal(puzzle_help):
-                return puzzle_help, tree
+    # def RBFS(self, puzzle: Puzzle8, f_limit):
+    #     if Utility.is_goal(puzzle):
+    #         return puzzle
+    #     f = {}
+    #     successors = puzzle.expand()
+    #     if successors.__len__():
+    #         return None, sys.maxsize
+    #     for s in successors:
+    #         f[s] = max(s.get_priority() + Utility.get_hurestic1(s), f[puzzle])
+    #     while True:
+    #         best = lowestValue(f)
+    #         if f[best] > f_limit:
+    #             return None, f[best]
+    #         alternative = secondValue(f)
+    #         result, f[best] = self.RBFS(best, min(f_limit, alternative))
+    #         if result is not None:
+    #             return result
 
-            possible_states = puzzle_help.expand()
-
-            for state in possible_states:
-                collect.put(state)
-                node_help = MyNode(state, parent=node_parent)
-                tree_quene.put(node_help)
+#     def RBFS(self, puzzle: Puzzle8):
+#         pass
+#
+#     def sma_star(self, puzzle: Puzzle8, max_size):
+#
+#         queue = PriorityQueue(maxsize=max_size)
+#         queue.put((puzzle.get_priority() + Utility.get_hurestic1(puzzle), puzzle))
+#
+#         while not queue.empty():
+#             puzzle_help = queue.get()[1]
+#             parent_puzzle = queue.get()[0]
+#
+#             if Utility.is_goal(puzzle_help):
+#                 return
+#
+#             possible_states = puzzle_help.expand()
+#
+#             minimum = sys.maxsize
+#             dic_expnd = {}
+#             for state in possible_states:
+#                 pri = state.get_priority() + Utility.get_hurestic1(state)
+#                 dic_expnd[state] = pri
+#                 if minimum < pri:
+#                     minimum = pri
+#
+#             queue.put((parent_puzzle, puzzle_help))
+#             for state, pri in dic_expnd:
+#                 queue.put((pri, state))
+#
+#
+# def lowestValue(f: dict):
+#     lowest = None
+#     min_help = sys.maxsize
+#     for key, value in f.items():
+#         if value < min_help:
+#             lowest = key
+#             min_help = value
+#     return lowest
+#
+#
+# def secondValue(f: dict):
+#     lowest = None
+#     lowest2 = None
+#     min_help = sys.maxsize
+#     min_help = sys.maxsize
+#
+#     for key, value in f.items():
+#         if value < min_help:
+#             lowest2 = lowest
+#             lowest = key
+#             min_help2 = min_help
+#             min_help = value
+#
+#     return lowest2
