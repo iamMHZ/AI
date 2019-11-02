@@ -24,7 +24,10 @@ class Window(QtWidgets.QMainWindow):
         new_list = []
         for label in self.labels:
             text = label.text()
-            new_list.append(int(text))
+            if text == ' ':
+                new_list.append(0)
+            else:
+                new_list.append(int(text))
 
         self.start_puzzle_date = new_list
         print(new_list)
@@ -107,7 +110,10 @@ class Window(QtWidgets.QMainWindow):
 
     def set_labels_text(self, number_list):
         for i, label in enumerate(self.labels):
-            label.setText(str(number_list[i]))
+            if number_list[i] == 0:
+                label.setText(" ")
+            else:
+                label.setText(str(number_list[i]))
 
     def start(self):
         self.update_after_drag()
