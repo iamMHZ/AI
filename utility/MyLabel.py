@@ -1,7 +1,7 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget
-from PyQt5.QtGui import QDrag, QPixmap, QPainter, QColor
-from PyQt5.QtCore import QMimeData, Qt, QPropertyAnimation, QRect, QVariantAnimation
+import time
+from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtGui import QDrag, QPixmap, QPainter
+from PyQt5.QtCore import QMimeData, Qt
 
 
 class DraggableDroppableLabel(QLabel):
@@ -27,8 +27,10 @@ class DraggableDroppableLabel(QLabel):
 
     def mouseMoveEvent(self, event):
         if not (event.buttons() & Qt.LeftButton):
+            # print("event.buttons() & Qt.LeftButton")
             return
         if (event.pos() - self.drag_start_position).manhattanLength() < QApplication.startDragDistance():
+            # print("event.pos() - self.drag_start_position).manhattanLength() < QApplication.startDragDistance()")
             return
         drag = QDrag(self)
         mimedata = QMimeData()
@@ -45,20 +47,11 @@ class DraggableDroppableLabel(QLabel):
     def dragEnterEvent(self, event):
         if event.mimeData().hasText():
             event.acceptProposedAction()
-            # print(event.mimeData().text())
 
     def dropEvent(self, event):
         old_text = self.text()
-        # print(type(event))
-        # swapping label values
         source = event.source()
-        # print("OLD Text : " + old_text)
-        pos = event.pos()
-        # print(pos)
         text = event.mimeData().text()
-        # print("New text :" + text)
         self.setText(text)
-
         source.setText(old_text)
-
         event.acceptProposedAction()

@@ -15,6 +15,7 @@ from utility.Thread import ImageThread, AlgorithmThread
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QPropertyAnimation
 import time
+from threading import Thread
 
 
 class Window(QtWidgets.QMainWindow):
@@ -143,10 +144,10 @@ class Window(QtWidgets.QMainWindow):
 
             data1 = self.labels[index0].text()
             data2 = self.labels[index1].text()
-
+            time.sleep(1)
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
-            # time.sleep(1)
+
 
     def show_tree_to_text(self, tree):
         text = ""
@@ -162,7 +163,7 @@ class Window(QtWidgets.QMainWindow):
         self.image_thread.start()
 
         self.show_tree_to_text(tree)
-        self.set_label_when_find_goal(item[0].state_stack)
+        Thread(target=self.set_label_when_find_goal, args=(item[0].state_stack,)).start()
 
     def on_tree_recived(self, path):
         image = load_image(path)
