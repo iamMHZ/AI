@@ -1,5 +1,4 @@
 import sys
-
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget
 from PyQt5.QtGui import QDrag, QPixmap, QPainter, QColor
 from PyQt5.QtCore import QMimeData, Qt, QPropertyAnimation, QRect, QVariantAnimation
