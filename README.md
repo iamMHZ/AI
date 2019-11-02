@@ -1,7 +1,12 @@
 # AI
 <b>University code </b> <br>
-<p>project 8-puzzle in vali-asr university </p>
+<p> 8-puzzle project </p>
 
 
 <br>
-<img src="https://github.com/iamMHZ/AI/blob/master/doc/puzzle.JPG" alt="Puzzle UI" >
+<img src="https://github.com/iamMHZ/AI/blob/master/doc/puzzle1.JPG" alt="Puzzle UI" >
+
+<br>
+<img src="https://github.com/iamMHZ/AI/blob/master/doc/puzzle2.JPG" alt="Puzzle UI" >
+<br>
+<img src="https://github.com/iamMHZ/AI/blob/master/doc/puzzle3.JPG" alt="Puzzle UI" >
