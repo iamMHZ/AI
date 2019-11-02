@@ -16,6 +16,7 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QPropertyAnimation
 import time
 
+
 class Window(QtWidgets.QMainWindow):
 
     def update_after_drag(self):
@@ -120,26 +121,7 @@ class Window(QtWidgets.QMainWindow):
 
         self.algorithm_thread.set_algorithm_type(self.current_algorithm)
         self.algorithm_thread.set_puzzle(puzzle)
-        if self.current_algorithm == 'BFS':
-            self.algorithm_thread.start()
-
-        elif self.current_algorithm == 'DFS':
-            # self.process = Process(target=self.search.dfs, args=(puzzle,))
-            # self.process.start()
-
-            self.algorithm_thread.start()
-
-        elif self.current_algorithm == 'UCS':
-            self.algorithm_thread.start()
-
-        elif self.current_algorithm == 'A*':
-            self.algorithm_thread.start()
-
-        elif self.current_algorithm == 'IDS':
-            self.algorithm_thread.start()
-
-        elif self.current_algorithm == 'IDA*':
-            self.algorithm_thread.start()
+        self.algorithm_thread.start()
 
     def end(self):
         self.algorithm_thread.terminate()
@@ -158,6 +140,7 @@ class Window(QtWidgets.QMainWindow):
 
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
+            # time.sleep(1)
 
     def show_tree_to_text(self, tree):
         text = ""

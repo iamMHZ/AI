@@ -15,12 +15,12 @@ class Search:
     def bfs(self, puzzle: Puzzle8):
         queue_tree = Queue()
         queue_bfs = Queue()
-        return Utility.help_search(queue_bfs, puzzle, queue_tree)
+        return help_search(queue_bfs, puzzle, queue_tree)
 
     def dfs(self, puzzle: Puzzle8):
         queue_tree = LifoQueue()
         stack = LifoQueue()
-        return Utility.help_search(stack, puzzle, queue_tree)
+        return help_search(stack, puzzle, queue_tree)
 
     def ucs(self, puzzle: Puzzle8):
         tree_quene = PriorityQueue()
@@ -151,23 +151,43 @@ class Search:
                         tree_quene.put(node_help)
             cutoff += 1
 
-    # def RBFS(self, puzzle: Puzzle8, f_limit):
-    #     if Utility.is_goal(puzzle):
-    #         return puzzle
-    #     f = {}
-    #     successors = puzzle.expand()
-    #     if successors.__len__():
-    #         return None, sys.maxsize
-    #     for s in successors:
-    #         f[s] = max(s.get_priority() + Utility.get_hurestic1(s), f[puzzle])
-    #     while True:
-    #         best = lowestValue(f)
-    #         if f[best] > f_limit:
-    #             return None, f[best]
-    #         alternative = secondValue(f)
-    #         result, f[best] = self.RBFS(best, min(f_limit, alternative))
-    #         if result is not None:
-    #             return result
+
+def help_search(collect, puzzle, tree_quene):
+    # add initial state to queue:
+    collect.put(puzzle)
+    tree = MyNode(puzzle)
+    tree_quene.put(tree)
+    while not collect.empty():
+        puzzle_help = collect.get()
+        node_parent = tree_quene.get()
+        print(puzzle_help)
+        if Utility.is_goal(puzzle_help):
+            return puzzle_help, tree
+
+        possible_states = puzzle_help.expand()
+
+        for state in possible_states:
+            collect.put(state)
+            node_help = MyNode(state, parent=node_parent)
+            tree_quene.put(node_help)
+
+# def RBFS(self, puzzle: Puzzle8, f_limit):
+#     if Utility.is_goal(puzzle):
+#         return puzzle
+#     f = {}
+#     successors = puzzle.expand()
+#     if successors.__len__():
+#         return None, sys.maxsize
+#     for s in successors:
+#         f[s] = max(s.get_priority() + Utility.get_hurestic1(s), f[puzzle])
+#     while True:
+#         best = lowestValue(f)
+#         if f[best] > f_limit:
+#             return None, f[best]
+#         alternative = secondValue(f)
+#         result, f[best] = self.RBFS(best, min(f_limit, alternative))
+#         if result is not None:
+#             return result
 
 #     def RBFS(self, puzzle: Puzzle8):
 #         pass
