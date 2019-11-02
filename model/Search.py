@@ -1,10 +1,7 @@
+from queue import Queue, LifoQueue, PriorityQueue
 from utility.MyNode import MyNode
-from queue import Queue
-from queue import LifoQueue
-from queue import PriorityQueue
-from utility import Utility
 from model.Puzzle8 import Puzzle8
-import sys
+from utility import Utility
 
 
 class Search:

@@ -1,37 +1,18 @@
-# ♥
+from ImageProcessor.ImageProcessor import image_parser, load_image, show_image
+from utility.Thread import ImageThread, AlgorithmThread
 from PyQt5.QtWidgets import QFileDialog
 from view.ui import Ui_MainWindow
 from anytree import RenderTree
-from anytree.exporter import DotExporter
+from PyQt5 import QtWidgets
+from utility.Utility import printer
+from model.Puzzle8 import Puzzle8
+from threading import Thread
 import qdarkstyle
 import random
-from ImageProcessor.ImageProcessor import image_parser, load_image, show_image
-from model.Search import Search
-from model.Puzzle8 import Puzzle8
-from utility.Utility import printer
-from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5 import QtWidgets
-from utility.Thread import ImageThread, AlgorithmThread
-from PyQt5.QtGui import QColor
-from PyQt5.QtCore import QPropertyAnimation
 import time
-from threading import Thread
 
 
 class Window(QtWidgets.QMainWindow):
-
-    def update_after_drag(self):
-
-        new_list = []
-        for label in self.labels:
-            text = label.text()
-            if text == ' ':
-                new_list.append(0)
-            else:
-                new_list.append(int(text))
-
-        self.start_puzzle_date = new_list
-        print(new_list)
 
     def __init__(self, ):
         super().__init__()
@@ -86,39 +67,6 @@ class Window(QtWidgets.QMainWindow):
         # updating ui in case of ruing algorithms continuously
         self.set_labels_text(self.start_puzzle_date)
 
-    def start_randomly(self):
-        random_list = self.get_random_list()
-        self.start_puzzle_date = random_list
-        self.set_labels_text(random_list)
-
-    def getfile(self):
-        file = QFileDialog.getOpenFileName(None, 'Open file', '../ImageProcessor/imageTemplates/',
-                                           "Image files (*.jpg *.png)")
-
-        path = file[0]
-        # checking if image path is valid
-        if len(path) > 0:
-            print(file)
-
-            # load image:
-            number_list = image_parser(path)
-            print(number_list)
-
-            self.start_puzzle_date = number_list
-            self.set_labels_text(number_list)
-
-    def get_random_list(self):
-        random_list = random.sample(range(0, 9), 9)
-
-        return random_list
-
-    def set_labels_text(self, number_list):
-        for i, label in enumerate(self.labels):
-            if number_list[i] == 0:
-                label.setText(" ")
-            else:
-                label.setText(str(number_list[i]))
-
     def start(self):
         self.update_after_drag()
 
@@ -137,6 +85,22 @@ class Window(QtWidgets.QMainWindow):
         self.algorithm_thread.terminate()
         self.image_thread.terminate()
 
+    def getfile(self):
+        file = QFileDialog.getOpenFileName(None, 'Open file', '../ImageProcessor/imageTemplates/',
+                                           "Image files (*.jpg *.png)")
+
+        path = file[0]
+        # checking if image path is valid
+        if len(path) > 0:
+            print(file)
+
+            # load image:
+            number_list = image_parser(path)
+            print(number_list)
+
+            self.start_puzzle_date = number_list
+            self.set_labels_text(number_list)
+
     def set_label_when_find_goal(self, stack):
         for item in stack:
             index0 = item[0]
@@ -151,13 +115,6 @@ class Window(QtWidgets.QMainWindow):
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
 
-    def show_tree_to_text(self, tree):
-        text = ""
-        for pre, fill, node in RenderTree(tree):
-            text += ("%s%s\n" % (pre, printer(str(node.name))))
-
-        self.ui.textLabel.setText(text)
-
     def on_received(self, item):
         tree = item[1]
         self.image_thread.set_algorithm_name(self.current_algorithm)
@@ -170,6 +127,41 @@ class Window(QtWidgets.QMainWindow):
     def on_tree_recived(self, path):
         image = load_image(path)
         show_image(self.current_algorithm, image, 0)
+
+    def set_labels_text(self, number_list):
+        for i, label in enumerate(self.labels):
+            if number_list[i] == 0:
+                label.setText(" ")
+            else:
+                label.setText(str(number_list[i]))
+
+    def get_random_list(self):
+        random_list = random.sample(range(0, 9), 9)
+        return random_list
+
+    def start_randomly(self):
+        random_list = self.get_random_list()
+        self.start_puzzle_date = random_list
+        self.set_labels_text(random_list)
+
+    def update_after_drag(self):
+        new_list = []
+        for label in self.labels:
+            text = label.text()
+            if text == ' ':
+                new_list.append(0)
+            else:
+                new_list.append(int(text))
+
+        self.start_puzzle_date = new_list
+        print(new_list)
+
+    def show_tree_to_text(self, tree):
+        text = ""
+        for pre, fill, node in RenderTree(tree):
+            text += ("%s%s\n" % (pre, printer(str(node.name))))
+
+        self.ui.textLabel.setText(text)
 
 
 def main():
