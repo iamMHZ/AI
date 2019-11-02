@@ -4,4 +4,4 @@
 
 
 <br>
-<img src="/doc/puzzle.jpg" alt="Puzzle UI" height="500" width="500">
+<img src="./doc/puzzle.jpg" alt="Puzzle UI" height="500" width="500">
