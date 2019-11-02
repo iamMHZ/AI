@@ -79,6 +79,9 @@ class Window(QtWidgets.QMainWindow):
         self.image_thread.signal.connect(self.on_tree_recived)
 
     def combobox_changed(self, text):
+        # if puzzle has been changed manually  , we must update the self.start_puzzle_date:
+        self.update_after_drag()
+
         self.current_algorithm = text
         # updating ui in case of ruing algorithms continuously
         self.set_labels_text(self.start_puzzle_date)
@@ -147,7 +150,6 @@ class Window(QtWidgets.QMainWindow):
             time.sleep(1)
             self.labels[index0].setText(data2)
             self.labels[index1].setText(data1)
-
 
     def show_tree_to_text(self, tree):
         text = ""
