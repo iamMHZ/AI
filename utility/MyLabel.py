@@ -39,5 +39,5 @@ class DraggableDroppableLabel(QLabel):
         source = event.source()
         text = event.mimeData().text()
         self.setText(text)
-        event.source.setText(old_text)
+        source.setText(old_text)
         event.acceptProposedAction()

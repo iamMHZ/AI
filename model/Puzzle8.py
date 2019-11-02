@@ -4,22 +4,17 @@ import numpy as np
 
 class Puzzle8:
 
-    def __init__(self, data, state_stack=[]):
+    def __init__(self, data=[], state_stack=[]):
         self.data = data
         self.state_stack = state_stack
 
     def __str__(self):
+        matrix = []
         matrix = np.reshape(self.data, (3, 3))
         return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(self.data[6:9])
 
     def __eq__(self, other):
         return self.data == other.data
-
-    def __lt__(self, other):
-        if len(self.state_stack) < len(other.state_stack):
-            return True
-        else:
-            return False
 
     # comparing two objects
     def __lt__(self, other):
@@ -27,10 +22,6 @@ class Puzzle8:
 
     def get_priority(self):
         return len(self.state_stack)
-
-    def swap(self, _list, to, _from):
-        _list[to], _list[_from] = _list[_from], _list[to]
-        return _list
 
     def expand(self):
         # taking a copy of current state of this 8-puzzle
@@ -190,3 +181,7 @@ class Puzzle8:
             possible_states.append(puzzle)
 
         return possible_states
+
+    def swap(self, _list, to, _from):
+        _list[to], _list[_from] = _list[_from], _list[to]
+        return _list
