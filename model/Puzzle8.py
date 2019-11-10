@@ -1,16 +1,51 @@
+# from utility import Utility
+# from view.Main import Window
 import numpy as np
 
 
 class Puzzle8:
 
-    def __init__(self, data, state_stack):
+    def __init__(self, data, state_stack=[]):
         self.data = data
         self.state_stack = state_stack
 
     def __str__(self):
-        matrix = []
         matrix = np.reshape(self.data, (3, 3))
         return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(self.data[6:9])
+        # if super().algo == "BFS":
+        #     matrix = np.reshape(self.data, (3, 3))
+        #     return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(self.data[6:9])
+        # elif Window.current_algorithm.__eq__("DFS"):
+        #     matrix = np.reshape(self.data, (3, 3))
+        #     return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(self.data[6:9])
+        # elif Window.current_algorithm.__eq__("UCS"):
+        #     matrix = np.reshape(self.data, (3, 3))
+        #     return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(
+        #         self.data[6:9]) + '\n' + "g(n) = " + str(self.get_priority())
+        # elif Window.current_algorithm == ("A*"):
+        #     pr = self.get_priority()
+        #     he = Utility.get_hurestic1(self)
+        #     return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(
+        #         self.data[6:9]) + \
+        #            '\n' + "g(n) = " + str(pr) + \
+        #            '\n' + "h(n) = " + str(he) + \
+        #            '\n' + "f(n) = " + str(he + pr)
+        # elif Window.current_algorithm.__eq__("IDS"):
+        #     pr = self.get_priority()
+        #     he = Utility.get_hurestic1(self)
+        #     return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(
+        #         self.data[6:9]) + \
+        #            '\n' + "g(n) = " + str(pr) + \
+        #            '\n' + "h(n) = " + str(he) + \
+        #            '\n' + "f(n) = " + str(he + pr)
+        # elif Window.current_algorithm.__eq__("IDA*"):
+        #     pr = self.get_priority()
+        #     he = Utility.get_hurestic1(self)
+        #     return str(self.data[0:3]) + '\n' + str(self.data[3:6]) + '\n' + str(
+        #         self.data[6:9]) + \
+        #            '\n' + "g(n) = " + str(pr) + \
+        #            '\n' + "h(n) = " + str(he) + \
+        #            '\n' + "f(n) = " + str(he + pr)
 
     def __eq__(self, other):
         return self.data == other.data

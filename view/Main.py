@@ -1,12 +1,12 @@
 from ImageProcessor.ImageProcessor import image_parser, load_image, show_image
-from utility.Thread import ImageThread, AlgorithmThread
+import utility.Thread as Thread
 from PyQt5.QtWidgets import QFileDialog
 from view.ui import Ui_MainWindow
 from anytree import RenderTree
 from PyQt5 import QtWidgets
 from utility.Utility import printer
-from model.Puzzle8 import Puzzle8
-from threading import Thread
+import model.Puzzle8 as Puzzle8
+from threading import Thread as Threads
 import qdarkstyle
 import random
 import time
@@ -14,7 +14,7 @@ import time
 
 class Window(QtWidgets.QMainWindow):
 
-    def __init__(self, ):
+    def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -23,8 +23,8 @@ class Window(QtWidgets.QMainWindow):
         self.ui.comboBox.addItems(item_list)
 
         self.current_algorithm = self.ui.comboBox.currentText()
-        # self.start_puzzle_date = self.get_random_list()
-        self.start_puzzle_date = [1, 2, 3, 4, 5, 6, 7, 0, 8]
+
+        self.start_puzzle_date = [0, 2, 3, 1, 5, 6, 4, 7, 8]
 
         # put labels together for better control
         self.labels = []
@@ -46,17 +46,15 @@ class Window(QtWidgets.QMainWindow):
         self.ui.startBtn.clicked.connect(self.start)
         self.ui.endBtn.clicked.connect(self.end)
 
-        # self.ui.comboBox.currentIndexChanged.connect(self.combobox_changed)
-
         # if you don't put [str] it return the index of combobox selected item
         self.ui.comboBox.activated[str].connect(self.combobox_changed)
 
         # initialize threads
         # algorithm threads
-        self.algorithm_thread = AlgorithmThread(Puzzle8(self.start_puzzle_date))
+        self.algorithm_thread = Thread.AlgorithmThread(Puzzle8.Puzzle8(self.start_puzzle_date))
         self.algorithm_thread.signal.connect(self.on_received)
         # Image thread:
-        self.image_thread = ImageThread(self.current_algorithm)
+        self.image_thread = Thread.ImageThread(self.current_algorithm)
         self.image_thread.signal.connect(self.on_tree_recived)
 
     def combobox_changed(self, text):
@@ -64,13 +62,14 @@ class Window(QtWidgets.QMainWindow):
         self.update_after_drag()
 
         self.current_algorithm = text
+        print(text)
         # updating ui in case of ruing algorithms continuously
         self.set_labels_text(self.start_puzzle_date)
 
     def start(self):
         self.update_after_drag()
 
-        puzzle = Puzzle8(self.start_puzzle_date)
+        puzzle = Puzzle8.Puzzle8(self.start_puzzle_date)
         print(self.current_algorithm)
 
         # Terminate threads that may run
@@ -106,9 +105,6 @@ class Window(QtWidgets.QMainWindow):
             index0 = item[0]
             index1 = item[1]
 
-            # self.labels[index0].animation.start()
-            # self.labels[index1].animation.start()
-
             data1 = self.labels[index0].text()
             data2 = self.labels[index1].text()
             time.sleep(1)
@@ -122,7 +118,7 @@ class Window(QtWidgets.QMainWindow):
         self.image_thread.start()
 
         self.show_tree_to_text(tree)
-        Thread(target=self.set_label_when_find_goal, args=(item[0].state_stack,)).start()
+        Threads(target=self.set_label_when_find_goal, args=(item[0].state_stack,)).start()
 
     def on_tree_recived(self, path):
         image = load_image(path)

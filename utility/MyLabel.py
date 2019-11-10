@@ -15,6 +15,7 @@ class DraggableDroppableLabel(QLabel):
 
     def mouseMoveEvent(self, event):
         if not (event.buttons() & Qt.LeftButton):
+            print("event.buttons() & Qt.LeftButton + :" + event.buttons() + "   " + Qt.LeftButton)
             return
         if (event.pos() - self.drag_start_position).manhattanLength() < QApplication.startDragDistance():
             return
