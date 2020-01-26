@@ -24,8 +24,8 @@
 </ul>
 
 <h4>Note: </h4>
-<p>Configure <a href="http://graphviz.org/">graphviz</a>
-and <a href = "https://github.com/tesseract-ocr/tesseract/wiki" > tesseract </a>
+<p>Configure <a href="http://graphviz.org/" target="_blank">graphviz</a>
+and <a href = "https://github.com/tesseract-ocr/tesseract/wiki" target="_blank"> tesseract </a>
 for your operating system
 </p>
 
