@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QThread, pyqtSignal, Qt
+from PyQt5.QtCore import QThread, pyqtSignal
 from anytree.exporter import DotExporter
 from model.Search import Search
 
