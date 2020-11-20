@@ -29,6 +29,10 @@ and <a href = "https://github.com/tesseract-ocr/tesseract/wiki" target="_blank">
 for your operating system
 </p>
 
+<h3>Run: </h3>
+  Run <a href="https://github.com/iamMHZ/AI/blob/master/view/Main.py">Main.py</a>
+  
+
 <h3>Screenshots: </h3>
 
 <img src="https://github.com/iamMHZ/AI/blob/master/doc/ai.gif" alt="UI" >
